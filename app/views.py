@@ -50,12 +50,65 @@ def submit_textarea():
     """
     Endpoint to create a new transaction via our application.
     """
-    post_content = request.form["content"]
-    author = request.form["author"]
+    num_hist = request.form["num_hist"]
+    id_paciente = request.form["id_paciente"]
+    apellidos = request.form["apellidos"]
+    nombres = request.form["nombres"]
+    edad = request.form["edad"]
+    sexo = request.form["sexo"]
+    ocupacion = request.form["ocupacion"]
+    fecha_nac = request.form["fecha_nac"]
+    edo_civil = request.form["edo_civil"]
+    nacionalidad = request.form["nacionalidad"]
+    grad_est = request.form["grad_est"]
+    fecha = request.form["fecha"]
+    piso = request.form["piso"]
+    cama = request.form["cama"]
+    motiv_consulta = request.form["motiv_consulta"]
+    enf_actual = request.form["enf_actual"]
+    enf_antecedentes = request.form["enf_antecedentes"]
+    habitos_toxicos = request.form["habitos_toxicos"]
+    habitos_fisiologicos = request.form["habitos_fisiologicos"]
+    padecimientos = request.form["padecimientos"]
+    heredofamiliares = request.form["heredofamiliares"]
+    peso = request.form["peso"]
+    estatura = request.form["estatura"]
+    imc = request.form["imc"]
+    temperatura = request.form["temperatura"]
+    diagnostico = request.form["diagnostico"]
+    otros = request.form["otros"]
+    medico = request.form["medico"]
+    cedula = request.form["cedula"]
 
     post_object = {
-        'author': author,
-        'content': post_content,
+        'num_hist' : num_hist,
+        'id_paciente' : id_paciente,
+        'apellidos' : apellidos,
+        'nombres' : nombres,
+        'edad' : edad,
+        'sexo' : sexo,
+        'ocupacion' : ocupacion,
+        'fecha_nac' : fecha_nac,
+        'edo_civil' : edo_civil,
+        'nacionalidad' : nacionalidad,
+        'fecha' : fecha,
+        'piso' : piso,
+        'cama' : cama,
+        'motiv_consulta' : motiv_consulta,
+        'enf_actual' : enf_actual,
+        'enf_antecedentes' : enf_antecedentes,
+        'habitos_toxicos' : habitos_toxicos,
+        'habitos_fisiologicos' : habitos_fisiologicos,
+        'padecimientos' : padecimientos,
+        'heredofamiliares' : heredofamiliares,
+        'peso' : peso,
+        'estatura' : estatura,
+        'imc' : imc,
+        'temperatura' : temperatura,
+        'diagnostico' : diagnostico,
+        'otros' : otros,
+        'medico' : medico,
+        'cedula' : cedula,
     }
 
     # Submit a transaction

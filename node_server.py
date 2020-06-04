@@ -13,13 +13,16 @@ blockchain.create_genesis_block()
 # the address to other participating members of the network
 peers = set()
 
-
 # endpoint to submit a new transaction. This will be used by
 # our application to add new data (posts) to the blockchain
 @app.route('/new_transaction', methods=['POST'])
 def new_transaction():
     tx_data = request.get_json()
-    required_fields = ["author", "content"]
+    required_fields = ["num_hist", "id_paciente", "apellidos", "nombres", "edad", "sexo", "ocupacion",
+                        "fecha_nac", "edo_civil", "nacionalidad", "grad_est", "fecha", "piso", "cama",
+                        "motiv_consulta", "enf_actual", "enf_antecedentes", "habitos_toxicos",
+                        "habitos_fisiologicos", "padecimientos", "heredofamiliares", "peso", "estatura", "IMC", "temperatura", 
+                        "diagnostico", "otros", "medico", "cedula"]
 
     for field in required_fields:
         if not tx_data.get(field):
