@@ -1,0 +1,38 @@
+body {
+	font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+	font-size:15px;
+	color:#BDBDBD;
+	line-height:20px;
+	background-color: #F2F2F2;
+	margin: 0;
+	padding: 70px 0 0 0;
+}
+
+.wrapper 
+{
+	max-width: 350px;
+	margin: auto;
+	text-align: center;
+	overflow: hidden;
+	background: none;
+	border-radius: 10px;
+	padding-bottom: 25px;
+	margin-top: 90px;
+}
+
+.send
+{
+	text-align: center;
+}
+
+input[type=submit]
+{
+	border: 0 none;
+	background: none;
+}
+
+a, a:hover, a:active, a:visited, a:link:hover, a:link:visited
+{
+	text-decoration: none;
+	color: black;
+}

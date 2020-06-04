@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="login.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+<body>
+	<style>
+		.demo-card-square.mdl-card {
+			width: 320px;
+			height: 320px;
+		}
+		.demo-card-square > .mdl-card__title {
+			color: #fff;
+			background:
+			url() bottom right 15% no-repeat #46B6AC;
+		}
+	</style>
+	<div class="wrapper">
+		<div class="demo-card-square mdl-card mdl-shadow--2dp">
+			<div class="mdl-card__title mdl-card--expand">
+				<h2 class="mdl-card__title-text">Ingresar</h2>
+			</div>
+			<div class="mdl-card__supporting-text">
+				<div id="body">
+					<form class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" id="user" pattern="[A-Z,a-z, ]*">
+						<label class="mdl-textfield__label" for="user">Nombre</label>
+					</form>
+					<form class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="password" id="password">
+						<label class="mdl-textfield__label" for="password">Contraseña</label>
+					</form>
+				</div>
+				<div class="send">
+					<form action="index.html">
+						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+							<input type="submit" value="ACEPTAR" style="border: 0 none; background: none;">
+						</button>
+					</form>
+				</div>
+			</div>
+
+			<div class="mdl-card__actions mdl-card--border">
+				<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="Signup.html">
+					Registrarse
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
