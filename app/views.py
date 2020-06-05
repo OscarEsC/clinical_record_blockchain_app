@@ -5,34 +5,14 @@ import requests
 from flask import render_template, redirect, request
 
 from app import app
+from app.auxiliar.auxiliar import *
+
 
 # The node with which our application interacts, there can be multiple
 # such nodes as well.
 CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
 
 posts = []
-
-
-def fetch_posts():
-    """
-    Function to fetch the chain from a blockchain node, parse the
-    data and store it locally.
-    """
-    get_chain_address = "{}/chain".format(CONNECTED_NODE_ADDRESS)
-    response = requests.get(get_chain_address)
-    if response.status_code == 200:
-        content = []
-        chain = json.loads(response.content)
-        for block in chain["chain"]:
-            for tx in block["transactions"]:
-                tx["index"] = block["index"]
-                tx["hash"] = block["previous_hash"]
-                content.append(tx)
-
-        global posts
-        posts = sorted(content, key=lambda k: k['timestamp'],
-                       reverse=True)
-
 
 @app.route('/')
 def index():
@@ -51,8 +31,18 @@ def home():
 def login():
     return render_template('Login.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET'])
 def signup():
+    return render_template('Signup.html')
+
+@app.route('/signup', methods=['POST'])
+def signup_post():
+    user = request.form["user"]
+    rfc = request.form["rfc"]
+    password = request.form["password"]
+    
+    certName = username_to_certName(user)
+    print(certName, rfc, password)
     return render_template('Signup.html')
 
 @app.route('/submit', methods=['POST'])
@@ -128,6 +118,3 @@ def submit_textarea():
 
     return redirect('/')
 
-
-def timestamp_to_string(epoch_time):
-    return datetime.datetime.fromtimestamp(epoch_time).strftime('%H:%M')

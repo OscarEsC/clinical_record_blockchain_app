@@ -27,27 +27,27 @@
 				<h2 class="mdl-card__title-text">Registro</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<div id="body">
-					<form class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="text" id="user" pattern="[A-Z,a-z, ]*">
+				<form class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" action="/signup" method="POST" enctype="application/x-www-form-urlencoded">
+					<div id="body">
+						<input class="mdl-textfield__input" type="text" name="user" id="user" pattern="[A-Z,a-z, ]*">
 						<label class="mdl-textfield__label" for="user">Nombre</label>
-					</form>
-					<form class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="text" id="rfc" pattern="[A-Z,a-z,0-9]*">
+					<!-- </form>
+					<form class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> -->
+						<input class="mdl-textfield__input" type="text" name="rfc" id="rfc" pattern="[A-Z,a-z,0-9]*">
 						<label class="mdl-textfield__label" for="rfc">RFC</label>
-					</form>
-					<form class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="password" id="password">
+					<!-- </form>
+					<form class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> -->
+						<input class="mdl-textfield__input" type="password" name="password" id="password">
 						<label class="mdl-textfield__label" for="password">Contraseña</label>
-					</form>
-				</div>
-				<div class="send">
-					<a href="download/name.txt" download="name.txt">
-						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-							<input type="submit" value="ACEPTAR" style="border: 0 none; background: none;">
-						</button>
-					</a>
-				</div>
+					</div>
+					<div class="send">
+						<!-- <a href="download/name.txt" download="name.txt"> -->
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+								<input type="submit" value="ACEPTAR" style="border: 0 none; background: none;">
+							</button>
+						<!-- </a> -->
+					</div>
+				</form>
 			</div>
 
 			<div class="mdl-card__actions mdl-card--border">
