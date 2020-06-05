@@ -42,7 +42,7 @@ def signup_post():
     password = request.form["password"]
     
     certName = username_to_certName(user)
-    print(certName, rfc, password)
+    create_user_cert_request(certName, password)
     return render_template('Signup.html')
 
 @app.route('/submit', methods=['POST'])

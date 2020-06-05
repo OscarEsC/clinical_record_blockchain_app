@@ -1,6 +1,10 @@
 import datetime
 import json
 import requests
+from subprocess import Popen, PIPE, STDOUT
+from app import app
+from os.path import basename, abspath, join
+from os import pardir
 
 CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
 
@@ -32,3 +36,11 @@ def username_to_certName(user):
 
 def timestamp_to_string(epoch_time):
     return datetime.datetime.fromtimestamp(epoch_time).strftime('%H:%M')
+
+def create_user_cert_request(certName, password):
+    cert_dir = abspath(join(app.root_path, pardir))
+    cert_dir = join(cert_dir, "cert")
+    shell_file = join(cert_dir, "ec.sh")
+    out = Popen([shell_file,'hola'], stdout=PIPE, stderr=STDOUT)
+    stdout, stderr = out.communicate()
+    print(stdout)
