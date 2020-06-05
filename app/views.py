@@ -43,6 +43,17 @@ def index():
                            node_address=CONNECTED_NODE_ADDRESS,
                            readable_time=timestamp_to_string)
 
+@app.route('/history')
+def home():
+    return render_template('history.html')
+
+@app.route('/login')
+def login():
+    return render_template('Login.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('Signup.html')
 
 @app.route('/submit', methods=['POST'])
 def submit_textarea():
