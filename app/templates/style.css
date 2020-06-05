@@ -1,0 +1,32 @@
+#nav-wrapper {
+	position: center;
+    width: 100%;
+    height: auto;
+    z-index: 500;
+    max-width: 1730px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cont{
+	margin-top: 120px;
+	max-width: 1730px;
+	margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+body{
+	background: #fafafa
+}
+
+span{
+	font-size: 15px;
+	padding: 20px 0px;
+}
+
+input[type=file]
+{
+	border: 0 none;
+	background: none;
+}

@@ -38,8 +38,7 @@ def fetch_posts():
 def index():
     fetch_posts()
     return render_template('index.html',
-                           title='YourNet: Decentralized '
-                                 'content sharing',
+                           title='Medical Blockchain',
                            posts=posts,
                            node_address=CONNECTED_NODE_ADDRESS,
                            readable_time=timestamp_to_string)
@@ -77,8 +76,7 @@ def submit_textarea():
     temperatura = request.form["temperatura"]
     diagnostico = request.form["diagnostico"]
     otros = request.form["otros"]
-    medico = request.form["medico"]
-    cedula = request.form["cedula"]
+    cert = request.form["cert"]
 
     post_object = {
         'num_hist' : num_hist,
@@ -107,8 +105,7 @@ def submit_textarea():
         'temperatura' : temperatura,
         'diagnostico' : diagnostico,
         'otros' : otros,
-        'medico' : medico,
-        'cedula' : cedula,
+        'cert' : cert,
     }
 
     # Submit a transaction

@@ -21,8 +21,8 @@ def new_transaction():
     required_fields = ["num_hist", "id_paciente", "apellidos", "nombres", "edad", "sexo", "ocupacion",
                         "fecha_nac", "edo_civil", "nacionalidad", "grad_est", "fecha", "piso", "cama",
                         "motiv_consulta", "enf_actual", "enf_antecedentes", "habitos_toxicos",
-                        "habitos_fisiologicos", "padecimientos", "heredofamiliares", "peso", "estatura", "IMC", "temperatura", 
-                        "diagnostico", "otros", "medico", "cedula"]
+                        "habitos_fisiologicos", "padecimientos", "heredofamiliares", "peso", "estatura", "imc", "temperatura", 
+                        "diagnostico", "otros", "cert"]
 
     for field in required_fields:
         if not tx_data.get(field):
