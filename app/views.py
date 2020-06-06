@@ -45,6 +45,10 @@ def signup_post():
     create_user_cert_request(certName, password)
     return render_template('Signup.html')
 
+@app.route('/medical')
+def medical():
+    return render_template('medical.html')
+
 @app.route('/submit', methods=['POST'])
 def submit_textarea():
     """
