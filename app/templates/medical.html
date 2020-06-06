@@ -1,0 +1,96 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}		
+		<div class="cont">
+			<form action="/submit" id="textform" method="post">
+				<span>Datos personales:</span>
+				<div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 100px">
+				    <input class="mdl-textfield__input" type="text" id="num_hist" name="num_hist">
+				    <label class="mdl-textfield__label" for="num_hist">Num. Historia</label>
+  				</div>
+  				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+				    <input class="mdl-textfield__input" type="text" id="id_paciente" name="id_paciente">
+				    <label class="mdl-textfield__label" for="id_paciente">ID</label>
+  				</div>
+				</div>
+				<div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 190; margin: 0px 30px">
+				    <input class="mdl-textfield__input" type="text" id="apellidos" name="apellidos">
+				    <label class="mdl-textfield__label" for="apellidos">Apellidos</label>
+  				</div>
+  				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 190; margin: 0px 30px">
+				    <input class="mdl-textfield__input" type="text" id="nombres" name="nombres">
+				    <label class="mdl-textfield__label" for="nombres">Nombres</label>
+  				</div>
+  				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+				    <input class="mdl-textfield__input" type="text" id="edad" name="edad">
+				    <label class="mdl-textfield__label" for="edad">Edad</label>
+  				</div>
+  				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+				    <input class="mdl-textfield__input" type="text" id="sexo" name="sexo">
+				    <label class="mdl-textfield__label" for="sexo">Sexo</label>
+  				</div>
+				</div>
+				<div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+				    <input class="mdl-textfield__input" type="text" id="fecha" name="fecha">
+				    <label class="mdl-textfield__label" for="fecha">Fecha</label>
+  				</div>
+				</div>
+				<span>Motivo de consulta:</span>
+				<div>
+				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="motiv_consulta" name="motiv_consulta" ></textarea>
+    				<label class="mdl-textfield__label" for="motiv_consulta">Editar...</label>
+  				</div>
+				</div>
+				<span>Enfermedad actual:</span>
+				<div>
+				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="enf_actual" name="enf_actual" ></textarea>
+    				<label class="mdl-textfield__label" for="enf_actual">Editar...</label>
+  				</div>
+				</div>
+				<span>Diagnósitco:</span>
+				<div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 100px">
+				    <input class="mdl-textfield__input" type="text" id="peso" name="peso">
+				    <label class="mdl-textfield__label" for="peso">Peso</label>
+  				</div>
+  				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+				    <input class="mdl-textfield__input" type="text" id="estatura" name="estatura">
+				    <label class="mdl-textfield__label" for="estatura">Estatura</label>
+  				</div>
+  				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 100px">
+				    <input class="mdl-textfield__input" type="text" id="imc" name="imc">
+				    <label class="mdl-textfield__label" for="imc">IMC</label>
+  				</div>
+  				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+				    <input class="mdl-textfield__input" type="text" id="temperatura" name="temperatura">
+				    <label class="mdl-textfield__label" for="temperatura">Temperatura</label>
+  				</div>
+  				<br>
+				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="diagnostico" name="diagnostico" ></textarea>
+    				<label class="mdl-textfield__label" for="diagnostico">Diagnósitco</label>
+  				</div>
+				</div>
+				<div>
+  				<div style="margin: 0px 30px; text-align: center;">
+				    <input type="file" id="cert" name="cert" style="margin: 10px 10px; ">
+  				</div>
+				</div>
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin: 10px 0px;">
+					<input type="submit" value="Post" style="border: 0 none; background: none;">
+				</button>
+			</form>
+			<br>
+			<div>
+				<a href="{{node_address}}/mine" target="_blank" style="color: #fafafa">
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-bottom: 30px; margin-right: 20px;">Request to mine</button>
+				<a href="/" style="color: #fafafa"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-bottom: 30px; margin-left: 20px;">Resync</button></a>
+			</div>
+		</div>
+{% endblock %}
