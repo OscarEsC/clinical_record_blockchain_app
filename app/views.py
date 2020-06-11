@@ -42,7 +42,7 @@ def signup_post():
     password = request.form["password"]
     
     certName = username_to_certName(user)
-    dir_, zip_file = create_user_cert_request(certName, password)
+    dir_, zip_file = create_user_cert_request(certName, password) 
     return send_from_directory(dir_, filename=zip_file, as_attachment=True)
 
 @app.route('/medical')

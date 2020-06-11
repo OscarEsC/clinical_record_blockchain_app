@@ -47,7 +47,7 @@ def create_user_cert_request(certName, password):
     shell_file = join(cert_dir, user_request)
     out = Popen([shell_file, certName, password, cert_dir], stdout=PIPE, stderr=STDOUT)
     stdout, stderr = out.communicate()
-    file1, file2 = stdout.decode("utf-8").split(',')
+    file1, file2 = stdout.decode("utf-8").split(',') 
     zip_file = zip_files(file1, file2, password, cert_dir)
     return cert_dir, zip_file
 
