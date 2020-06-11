@@ -11,6 +11,7 @@ from pyminizip import compress_multiple
 CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
 
 user_request = "create_user_request.sh"
+sign_request = "sign_user_request.sh"
 
 def fetch_posts():
     """
@@ -47,8 +48,23 @@ def create_user_cert_request(certName, password):
     shell_file = join(cert_dir, user_request)
     out = Popen([shell_file, certName, password, cert_dir], stdout=PIPE, stderr=STDOUT)
     stdout, stderr = out.communicate()
-    file1, file2 = stdout.decode("utf-8").split(',') 
-    zip_file = zip_files(file1, file2, password, cert_dir)
+    key_file, csr_file = stdout.decode("utf-8").split(',') 
+    return key_file, csr_file
+
+def sign_user_request(csr_file):
+    cert_dir = abspath(join(app.root_path, pardir))
+    cert_dir = join(cert_dir, "cert")
+    shell_file = join(cert_dir, sign_request)
+    out = Popen([shell_file, csr_file, cert_dir], stdout=PIPE, stderr=STDOUT)
+    stdout, stderr = out.communicate()
+    cert_file = stdout.decode("utf-8")
+    return cert_file, cert_dir
+
+def new_certificate(certName, password):
+    key_file, csr_file = create_user_cert_request(certName, password)
+    cert_file, cert_dir = sign_user_request(basename(csr_file).split('.')[0])
+    zip_file = zip_files(cert_file, key_file, password, cert_dir)
+
     return cert_dir, zip_file
 
 def zip_files(file1, file2, password, cert_dir):
