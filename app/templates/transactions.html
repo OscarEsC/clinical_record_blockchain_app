@@ -3,16 +3,15 @@
 
 {% block content %}	
 
-	<div class="cont">
-		{% for post in posts %}
-    	<!-- Two Line List with secondary info and action -->
-		<style>
-			.demo-list-two {
-  				width: 300px;
-			}
-		</style>
+	<div class="cont" style="margin-top: 100px">
+		<div>
+			<a href="{{'http://127.0.0.1:8000'}}/mine" target="_blank" style="color: #fafafa">
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-bottom: 30px; margin-right: 20px;">Request to mine</button>
+			<a href="/" style="color: #fafafa"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-bottom: 30px; margin-left: 20px;">Resync</button></a>
+		</div>
 
 		<ul class="demo-list-two mdl-list" style="width: 100%;">
+			{% for post in posts %}
   			<li class="mdl-list__item mdl-list__item--two-line">
     			<span class="mdl-list__item-primary-content">
       			<i class="material-icons mdl-list__item-avatar">person</i>
@@ -22,8 +21,8 @@
     			<span class="mdl-list__item-secondary-content">
 		    	</span>
   			</li>
+  			{% endfor %}
 		</ul>
-		{% endfor %}
 
 	</div>
 

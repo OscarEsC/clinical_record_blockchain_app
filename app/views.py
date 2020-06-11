@@ -49,6 +49,10 @@ def signup_post():
 def medical():
     return render_template('medical.html')
 
+@app.route('/transactions')
+def transaction():
+    return render_template('transactions.html')
+
 @app.route('/history', methods=['POST'])
 def submit_textarea():
     """
@@ -118,7 +122,7 @@ def submit_textarea():
                   json=post_object,
                   headers={'Content-type': 'application/json'})
     
-    print(post_object)
+    #print(post_object)
     return redirect('/')
 
 @app.route('/medical', methods=['POST'])
@@ -164,6 +168,6 @@ def submit_textarea_medical():
                   json=post_object,
                   headers={'Content-type': 'application/json'})
     
-    print(post_object)
+    #print(post_object)
     return redirect('/')
 
