@@ -3,3 +3,6 @@
 cert/ec.sh
 cert/csrs/*
 cert/keys/*
+cert/database*
+cert/serial*
+cert/tmp/*

@@ -63,13 +63,15 @@ def sign_user_request(csr_file):
 def new_certificate(certName, password):
     key_file, csr_file = create_user_cert_request(certName, password)
     cert_file, cert_dir = sign_user_request(basename(csr_file).split('.')[0])
-    zip_file = zip_files(cert_file, key_file, password, cert_dir)
-
-    return cert_dir, zip_file
+    zip_dir, zip_file = zip_files(cert_file, key_file, password, cert_dir)
+    print(zip_dir)
+    print(zip_file)
+    return zip_dir, zip_file
 
 def zip_files(file1, file2, password, cert_dir):
     zip_name = basename(file1).split('.')[0] + '.zip'
+    cert_dir = join(cert_dir, 'tmp')
     zip_name_dir = join(cert_dir, zip_name)
     compress_multiple([file1, file2], [], zip_name_dir, password, 4)
 
-    return zip_name
+    return cert_dir, zip_name
