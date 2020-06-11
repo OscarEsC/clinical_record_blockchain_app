@@ -22,7 +22,7 @@ def new_transaction():
                         "fecha_nac", "edo_civil", "nacionalidad", "grad_est", "fecha", "piso", "cama",
                         "motiv_consulta", "enf_actual", "enf_antecedentes", "habitos_toxicos",
                         "habitos_fisiologicos", "padecimientos", "heredofamiliares", "peso", "estatura", "imc", "temperatura", 
-                        "diagnostico", "otros", "cert"]
+                        "diagnostico", "otros"]
 
     for field in required_fields:
         if not tx_data.get(field):
@@ -30,6 +30,22 @@ def new_transaction():
 
     tx_data["timestamp"] = time()
 
+    blockchain.add_new_transaction(tx_data)
+
+    return "Success", 201
+
+@app.route('/new_transaction_medical', methods=['POST'])
+def new_transaction_medical():
+    tx_data = request.get_json()
+    required_fields = ["num_hist", "id_paciente", "apellidos", "nombres", "edad", "sexo", "fecha",
+                        "motiv_consulta", "enf_actual", "peso", "estatura", "imc", "temperatura", "diagnostico"]
+
+    for field in required_fields:
+        if not tx_data.get(field):
+            return "Invalid transaction data", 404
+
+    tx_data["timestamp"] = time()
+    
     blockchain.add_new_transaction(tx_data)
 
     return "Success", 201
