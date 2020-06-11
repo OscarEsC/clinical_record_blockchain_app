@@ -12,6 +12,8 @@ CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
 
 user_request = "create_user_request.sh"
 sign_request = "sign_user_request.sh"
+verify_certificate = "verify_cert.sh"
+
 
 def fetch_posts():
     """
@@ -75,3 +77,19 @@ def zip_files(file1, file2, password, cert_dir):
     compress_multiple([file1, file2], [], zip_name_dir, password, 4)
 
     return cert_dir, zip_name
+
+def allowed_file(filename):
+    return True if filename.split('.')[1] == 'crt' else False
+
+def upload_dir():
+    up_dir = abspath(join(app.root_path, pardir))
+    up_dir = join(up_dir, "certs_to_verify")
+    return up_dir
+
+def is_valid_certificate(filename):
+    app_dir = abspath(join(app.root_path, pardir))
+    shell_file = join(app_dir, "cert")
+    shell_file = join(shell_file, verify_certificate)
+    out = Popen([shell_file, filename, app_dir], stdout=PIPE, stderr=STDOUT)
+    stdout, stderr = out.communicate()
+    return True if stdout.decode("utf-8") == "1" else False

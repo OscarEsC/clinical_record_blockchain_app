@@ -42,6 +42,7 @@ def new_transaction_medical():
 
     for field in required_fields:
         if not tx_data.get(field):
+            print("failed with ", field)
             return "Invalid transaction data", 404
 
     tx_data["timestamp"] = time()

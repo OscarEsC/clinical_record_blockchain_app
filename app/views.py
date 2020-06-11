@@ -6,6 +6,8 @@ from flask import render_template, redirect, request, send_from_directory
 
 from app import app
 from app.auxiliar.auxiliar import *
+from os.path import join
+from werkzeug.utils import secure_filename
 
 
 # The node with which our application interacts, there can be multiple
@@ -45,7 +47,7 @@ def signup_post():
     dir_, zip_file = new_certificate(certName, password) 
     return send_from_directory(dir_, filename=zip_file, as_attachment=True)
 
-@app.route('/medical')
+@app.route('/medical', methods=['GET'])
 def medical():
     return render_template('medical.html')
 
@@ -155,12 +157,33 @@ def submit_textarea_medical():
         'fecha' : fecha,
         'motiv_consulta' : motiv_consulta,
         'enf_actual' : enf_actual,
+        'peso' : peso,
         'estatura' : estatura,
         'imc' : imc,
         'temperatura' : temperatura,
         'diagnostico' : diagnostico,
     }
+    
+    # If does not upload a file
+    if 'cert' not in request.files:
+        # SHOW ERROR MESSAGE
+        return redirect('/medical')
+    cert_file = request.files['cert']
+    if cert_file.filename == '':
+        # SHOW ERROR MESSAGE
+        return redirect('/medical')
+    # Upload the .cert file to verify
+    if allowed_file(cert_file.filename):
+        filename = secure_filename(cert_file.filename)
+        cert_file.save(join(upload_dir(), filename))
+    
+    # Verify the certificate
+    if not is_valid_certificate(filename):
+        # SHOW ERROR MESSAGE
+        print("error")
+        return redirect('/medical')
 
+    print("success")
     # Submit a transaction
     new_tx_address = "{}/new_transaction_medical".format(CONNECTED_NODE_ADDRESS)
 
