@@ -49,7 +49,7 @@ def signup_post():
 def medical():
     return render_template('medical.html')
 
-@app.route('/submit', methods=['POST'])
+@app.route('/history', methods=['POST'])
 def submit_textarea():
     """
     Endpoint to create a new transaction via our application.
@@ -81,7 +81,6 @@ def submit_textarea():
     temperatura = request.form["temperatura"]
     diagnostico = request.form["diagnostico"]
     otros = request.form["otros"]
-    cert = request.form["cert"]
 
     post_object = {
         'num_hist' : num_hist,
@@ -110,7 +109,6 @@ def submit_textarea():
         'temperatura' : temperatura,
         'diagnostico' : diagnostico,
         'otros' : otros,
-        'cert' : cert,
     }
 
     # Submit a transaction
@@ -119,6 +117,53 @@ def submit_textarea():
     requests.post(new_tx_address,
                   json=post_object,
                   headers={'Content-type': 'application/json'})
+    
+    print(post_object)
+    return redirect('/')
 
+@app.route('/medical', methods=['POST'])
+def submit_textarea_medical():
+    """
+    Endpoint to create a new transaction via our application.
+    """
+    num_hist = request.form["num_hist"]
+    id_paciente = request.form["id_paciente"]
+    apellidos = request.form["apellidos"]
+    nombres = request.form["nombres"]
+    edad = request.form["edad"]
+    sexo = request.form["sexo"]
+    fecha = request.form["fecha"]
+    motiv_consulta = request.form["motiv_consulta"]
+    enf_actual = request.form["enf_actual"]
+    peso = request.form["peso"]
+    estatura = request.form["estatura"]
+    imc = request.form["imc"]
+    temperatura = request.form["temperatura"]
+    diagnostico = request.form["diagnostico"]
+
+    post_object = {
+        'num_hist' : num_hist,
+        'id_paciente' : id_paciente,
+        'apellidos' : apellidos,
+        'nombres' : nombres,
+        'edad' : edad,
+        'sexo' : sexo,
+        'fecha' : fecha,
+        'motiv_consulta' : motiv_consulta,
+        'enf_actual' : enf_actual,
+        'estatura' : estatura,
+        'imc' : imc,
+        'temperatura' : temperatura,
+        'diagnostico' : diagnostico,
+    }
+
+    # Submit a transaction
+    new_tx_address = "{}/new_transaction_medical".format(CONNECTED_NODE_ADDRESS)
+
+    requests.post(new_tx_address,
+                  json=post_object,
+                  headers={'Content-type': 'application/json'})
+    
+    print(post_object)
     return redirect('/')
 
