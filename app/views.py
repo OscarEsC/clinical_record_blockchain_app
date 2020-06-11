@@ -2,7 +2,7 @@ import datetime
 import json
 
 import requests
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, send_from_directory
 
 from app import app
 from app.auxiliar.auxiliar import *
@@ -42,8 +42,8 @@ def signup_post():
     password = request.form["password"]
     
     certName = username_to_certName(user)
-    create_user_cert_request(certName, password)
-    return render_template('Signup.html')
+    dir_, zip_file = create_user_cert_request(certName, password)
+    return send_from_directory(dir_, filename=zip_file, as_attachment=True)
 
 @app.route('/medical')
 def medical():

@@ -11,3 +11,4 @@ mkdir certs
 mkdir newcerts
 mkdir keys
 mkdir csrs
+mkdir tmp

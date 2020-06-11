@@ -5,8 +5,12 @@ from subprocess import Popen, PIPE, STDOUT
 from app import app
 from os.path import basename, abspath, join
 from os import pardir
+from zipfile import ZipFile
+from pyminizip import compress_multiple
 
 CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
+
+user_request = "create_user_request.sh"
 
 def fetch_posts():
     """
@@ -40,7 +44,16 @@ def timestamp_to_string(epoch_time):
 def create_user_cert_request(certName, password):
     cert_dir = abspath(join(app.root_path, pardir))
     cert_dir = join(cert_dir, "cert")
-    shell_file = join(cert_dir, "ec.sh")
-    out = Popen([shell_file,'hola'], stdout=PIPE, stderr=STDOUT)
+    shell_file = join(cert_dir, user_request)
+    out = Popen([shell_file, certName, password, cert_dir], stdout=PIPE, stderr=STDOUT)
     stdout, stderr = out.communicate()
-    print(stdout)
+    file1, file2 = stdout.decode("utf-8").split(',')
+    zip_file = zip_files(file1, file2, password, cert_dir)
+    return cert_dir, zip_file
+
+def zip_files(file1, file2, password, cert_dir):
+    zip_name = basename(file1).split('.')[0] + '.zip'
+    zip_name_dir = join(cert_dir, zip_name)
+    compress_multiple([file1, file2], [], zip_name_dir, password, 4)
+
+    return zip_name
