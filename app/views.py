@@ -16,22 +16,36 @@ CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
 
 posts = []
 
+def fetch_posts():
+    """
+    Function to fetch the chain from a blockchain node, parse the
+    data and store it locally.
+    """
+    get_chain_address = "{}/chain".format(CONNECTED_NODE_ADDRESS)
+    response = requests.get(get_chain_address)
+    if response.status_code == 200:
+        content = []
+        chain = json.loads(response.content)
+        for block in chain["chain"]:
+            for tx in block["transactions"]:
+                tx["index"] = block["index"]
+                tx["hash"] = block["previous_hash"]
+                content.append(tx)
+
+        global posts
+        posts = sorted(content, key=lambda k: k['timestamp'],
+                       reverse=True)
+
 @app.route('/')
 def index():
     fetch_posts()
     return render_template('index.html',
-                           title='Medical Blockchain',
-                           posts=posts,
-                           node_address=CONNECTED_NODE_ADDRESS,
-                           readable_time=timestamp_to_string)
+                           title='Medical Blockchain')
 
 @app.route('/history')
 def home():
-    return render_template('history.html')
-
-@app.route('/login')
-def login():
-    return render_template('Login.html')
+    return render_template('history.html',
+                            title='Medical History')
 
 @app.route('/signup', methods=['GET'])
 def signup():
@@ -49,11 +63,17 @@ def signup_post():
 
 @app.route('/medical', methods=['GET'])
 def medical():
-    return render_template('medical.html')
+    return render_template('medical.html',
+                            title='Medical Advice')
 
 @app.route('/transactions')
 def transaction():
-    return render_template('transactions.html')
+    fetch_posts()
+    return render_template('/transactions.html',
+                           title='Transaction',
+                           posts=posts,
+                           node_address=CONNECTED_NODE_ADDRESS,
+                           readable_time=timestamp_to_string)
 
 @app.route('/history', methods=['POST'])
 def submit_textarea():
@@ -99,6 +119,7 @@ def submit_textarea():
         'fecha_nac' : fecha_nac,
         'edo_civil' : edo_civil,
         'nacionalidad' : nacionalidad,
+        'grad_est' : grad_est,
         'fecha' : fecha,
         'piso' : piso,
         'cama' : cama,
@@ -137,7 +158,7 @@ def submit_textarea():
         print("error")
         return redirect('/history')
 
-    print("success")
+    #print("success")
     # Submit a transaction
     new_tx_address = "{}/new_transaction".format(CONNECTED_NODE_ADDRESS)
 
@@ -146,7 +167,7 @@ def submit_textarea():
                   headers={'Content-type': 'application/json'})
     
     #print(post_object)
-    return redirect('/')
+    return redirect('/transactions')
 
 @app.route('/medical', methods=['POST'])
 def submit_textarea_medical():
@@ -204,7 +225,7 @@ def submit_textarea_medical():
         print("error")
         return redirect('/medical')
 
-    print("success")
+    #print("success")
     # Submit a transaction
     new_tx_address = "{}/new_transaction_medical".format(CONNECTED_NODE_ADDRESS)
 
@@ -213,5 +234,5 @@ def submit_textarea_medical():
                   headers={'Content-type': 'application/json'})
     
     #print(post_object)
-    return redirect('/')
+    return redirect('/transactions')
 

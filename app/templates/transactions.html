@@ -18,9 +18,7 @@
       			<span>{{post.apellidos}} {{post.nombres}}</span>
      			<span class="mdl-list__item-sub-title">{{post.id_paciente}}</span>
     			</span>
-    			<span class="mdl-list__item-secondary-content">
-    			
-		    	</span>
+    			<span class="mdl-list__item-secondary-content">{{readable_time(post.timestamp)}}</span>
   			</li>
   			{% endfor %}
 		</ul>

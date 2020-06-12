@@ -15,26 +15,6 @@ sign_request = "sign_user_request.sh"
 verify_certificate = "verify_cert.sh"
 
 
-def fetch_posts():
-    """
-    Function to fetch the chain from a blockchain node, parse the
-    data and store it locally.
-    """
-    get_chain_address = "{}/chain".format(CONNECTED_NODE_ADDRESS)
-    response = requests.get(get_chain_address)
-    if response.status_code == 200:
-        content = []
-        chain = json.loads(response.content)
-        for block in chain["chain"]:
-            for tx in block["transactions"]:
-                tx["index"] = block["index"]
-                tx["hash"] = block["previous_hash"]
-                content.append(tx)
-
-        global posts
-        posts = sorted(content, key=lambda k: k['timestamp'],
-                       reverse=True)
-
 def username_to_certName(user):
     user = user.split(' ')
     user = [x.capitalize() for x in user]
@@ -65,6 +45,8 @@ def sign_user_request(csr_file):
 def new_certificate(certName, password):
     key_file, csr_file = create_user_cert_request(certName, password)
     cert_file, cert_dir = sign_user_request(basename(csr_file).split('.')[0])
+    print(cert_file)
+    print(cert_dir)
     zip_dir, zip_file = zip_files(cert_file, key_file, password, cert_dir)
     print(zip_dir)
     print(zip_file)

@@ -46,6 +46,7 @@ def new_transaction_medical():
             return "Invalid transaction data", 404
 
     tx_data["timestamp"] = time()
+    
     blockchain.add_new_transaction(tx_data)
 
     return "Success", 201
