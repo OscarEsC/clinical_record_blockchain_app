@@ -3,14 +3,14 @@
 
 {% block content %}	
 
-	<div class="cont" style="margin-top: 100px">
-		<div>
+	<div class="cont" style="margin-top: 150px">
+		<div style="">
 			<a href="{{'http://127.0.0.1:8000'}}/mine" target="_blank" style="color: #fafafa">
 				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-bottom: 30px; margin-right: 20px;">Request to mine</button>
-			<a href="/" style="color: #fafafa"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-bottom: 30px; margin-left: 20px;">Resync</button></a>
+			<a href="/transactions" style="color: #fafafa"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-bottom: 30px; margin-left: 20px;">Resync</button></a>
 		</div>
 
-		<ul class="demo-list-two mdl-list" style="width: 100%;">
+		<ul class="demo-list-two mdl-list" style="width: 50%; margin-left: auto; margin-right: auto;">
 			{% for post in posts %}
   			<li class="mdl-list__item mdl-list__item--two-line">
     			<span class="mdl-list__item-primary-content">
@@ -19,6 +19,7 @@
      			<span class="mdl-list__item-sub-title">{{post.id_paciente}}</span>
     			</span>
     			<span class="mdl-list__item-secondary-content">
+    			
 		    	</span>
   			</li>
   			{% endfor %}
