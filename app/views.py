@@ -217,7 +217,6 @@ def submit_textarea_medical():
         'temperatura' : temperatura,
         'diagnostico' : diagnostico,
     }
-    
     # If does not upload a file
     if 'cert' not in request.files:
         # SHOW ERROR MESSAGE
@@ -250,3 +249,43 @@ def submit_textarea_medical():
     #print(post_object)
     return redirect('/transactions')
 
+@app.route('/register_new_node', methods=['GET'])
+def register_node():
+    return render_template('register_node.html',
+                            title='Register Node')
+
+@app.route('/register_new_node', methods=['POST'])
+def register_node_post():
+    new_host = request.form['node']
+    print(new_host)
+    # If does not upload a file
+    if 'cert' not in request.files:
+        # SHOW ERROR MESSAGE
+        print("no file 1")
+        return redirect('/register_new_node')
+    cert_file = request.files['cert']
+    if cert_file.filename == '':
+        # SHOW ERROR MESSAGE
+        print("no file 2")
+        return redirect('/register_new_node')
+    # Upload the .cert file to verify
+    if allowed_file(cert_file.filename):
+        filename = secure_filename(cert_file.filename)
+        cert_file.save(join(upload_dir(), filename))
+    
+    # Verify the certificate
+    if not is_valid_certificate(filename):
+        # SHOW ERROR MESSAGE
+        print("error")
+        return redirect('/register_new_node')
+
+    print("success")
+    data = {'node_address': CONNECTED_NODE_ADDRESS}
+    headers = {'Content-Type': 'application/json'}
+    register_post = new_host + '/register_with'
+    response = requests.post(register_post,json=data,headers=headers)
+    if response.status_code == 200:
+        return redirect('/register_new_node')
+    else:
+        print("error al registrar nuevo nodo")
+        return redirect('/register_new_node')

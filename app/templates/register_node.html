@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Resgister node</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+<body>
+	<style>
+		.demo-card-square.mdl-card {
+			width: 320px;
+			height: 320px;
+		}
+		.demo-card-square > .mdl-card__title {
+			color: #fff;
+			background:
+			url() bottom right 15% no-repeat #46B6AC;
+		}
+	</style>
+	<div class="wrapper">
+		<div class="demo-card-square mdl-card mdl-shadow--2dp" style="height: 380px;">
+			<div class="mdl-card__title mdl-card--expand">
+				<h2 class="mdl-card__title-text">Registrar nuevo nodo a la cadena de bloques</h2>
+			</div>
+			<div class="mdl-card__supporting-text">
+				<form action="/register_new_node" method="POST" enctype="multipart/form-data">
+					<div id="body">
+						<div class="mdl-textfield mdl-js-textfield ">
+							<input class="mdl-textfield__input" type="text" id="node" name="node" pattern="https?://[A-Z,a-z,0-9,:,\.]*" required>
+							<label class="mdl-textfield__label" for="node">host</label>
+                        </div>
+                        <span>Certificado de autenticacion</span>
+                        <div style="margin: 0px 30px; text-align: center;">
+                            <input type="file" id="cert" name="cert" style="margin: 10px 10px; " accept=".crt" required>
+                        </div>
+					</div>
+					<div class="send">
+						<!-- <a href="download/name.txt" download="name.txt"> -->
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+								<input type="submit" value="ACEPTAR" style="border: 0 none; background: none;">
+							</button>
+						<!-- </a> -->
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
