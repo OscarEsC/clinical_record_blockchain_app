@@ -36,11 +36,22 @@ def fetch_posts():
         posts = sorted(content, key=lambda k: k['timestamp'],
                        reverse=True)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    fetch_posts()
+    #fetch_posts()
     return render_template('index.html',
                            title='Medical Blockchain')
+
+@app.route('/', methods=['POST'])
+def index_post():
+    fetch_posts()
+    to_search = request.form['search']
+    founded = search_in_chain(posts, to_search)
+    return render_template('search.html',
+                           title='Transactions founded',
+                           posts=founded,
+                           readable_time=timestamp_to_string)
+
 
 @app.route('/history')
 def home():
@@ -146,6 +157,7 @@ def submit_textarea():
     cert_file = request.files['cert']
     if cert_file.filename == '':
         # SHOW ERROR MESSAGE
+        print("no file")
         return redirect('/history')
     # Upload the .cert file to verify
     if allowed_file(cert_file.filename):
@@ -158,7 +170,7 @@ def submit_textarea():
         print("error")
         return redirect('/history')
 
-    #print("success")
+    print("success")
     # Submit a transaction
     new_tx_address = "{}/new_transaction".format(CONNECTED_NODE_ADDRESS)
 
@@ -209,10 +221,12 @@ def submit_textarea_medical():
     # If does not upload a file
     if 'cert' not in request.files:
         # SHOW ERROR MESSAGE
+        print("no file")
         return redirect('/medical')
     cert_file = request.files['cert']
     if cert_file.filename == '':
         # SHOW ERROR MESSAGE
+        print("no file")
         return redirect('/medical')
     # Upload the .cert file to verify
     if allowed_file(cert_file.filename):
@@ -225,7 +239,7 @@ def submit_textarea_medical():
         print("error")
         return redirect('/medical')
 
-    #print("success")
+    print("success")
     # Submit a transaction
     new_tx_address = "{}/new_transaction_medical".format(CONNECTED_NODE_ADDRESS)
 

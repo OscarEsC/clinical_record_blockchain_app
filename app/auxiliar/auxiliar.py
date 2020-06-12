@@ -40,16 +40,14 @@ def sign_user_request(csr_file):
     out = Popen([shell_file, csr_file, cert_dir], stdout=PIPE, stderr=STDOUT)
     stdout, stderr = out.communicate()
     cert_file = stdout.decode("utf-8")
+
     return cert_file, cert_dir
 
 def new_certificate(certName, password):
     key_file, csr_file = create_user_cert_request(certName, password)
     cert_file, cert_dir = sign_user_request(basename(csr_file).split('.')[0])
-    print(cert_file)
-    print(cert_dir)
     zip_dir, zip_file = zip_files(cert_file, key_file, password, cert_dir)
-    print(zip_dir)
-    print(zip_file)
+
     return zip_dir, zip_file
 
 def zip_files(file1, file2, password, cert_dir):
@@ -74,4 +72,21 @@ def is_valid_certificate(filename):
     shell_file = join(shell_file, verify_certificate)
     out = Popen([shell_file, filename, app_dir], stdout=PIPE, stderr=STDOUT)
     stdout, stderr = out.communicate()
+
     return True if stdout.decode("utf-8") == "1" else False
+
+def search_in_chain(chain, to_search):
+    # chain is a list of dicts, ecery dict is a block instance
+    founds = []
+    for block in chain:
+        # iter over block's values
+        for key, value in block.items():
+            # Ommit some indifferent values
+            if key in ['peso', 'estatura', 'imc', 'temperatura', 'timestamp', 'hash']:
+                continue
+            # If to_search is a substring, append the current block to the result
+            if str(value).lower().find(to_search.lower()) >= 0:
+                founds.append(block)
+                break
+
+    return founds
