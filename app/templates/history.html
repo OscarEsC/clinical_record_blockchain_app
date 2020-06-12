@@ -3,11 +3,11 @@
 
 {% block content %}
 		<div class="cont">
-			<form action="/history" id="textform" method="post">
+			<form action="/history" id="textform" enctype="multipart/form-data" method="POST">
 				<span>Datos personales:</span>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 100px">
-				    <input class="mdl-textfield__input" type="text" id="num_hist" name="num_hist">
+				    <input class="mdl-textfield__input" type="text" id="num_hist" name="num_hist" required>
 				    <label class="mdl-textfield__label" for="num_hist">Num. Historia</label>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
@@ -17,48 +17,48 @@
 				</div>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 190; margin: 0px 30px">
-				    <input class="mdl-textfield__input" type="text" id="apellidos" name="apellidos">
+				    <input class="mdl-textfield__input" type="text" id="apellidos" name="apellidos" required>
 				    <label class="mdl-textfield__label" for="apellidos">Apellidos</label>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 190; margin: 0px 30px">
-				    <input class="mdl-textfield__input" type="text" id="nombres" name="nombres">
+				    <input class="mdl-textfield__input" type="text" id="nombres" name="nombres" required>
 				    <label class="mdl-textfield__label" for="nombres">Nombres</label>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
-				    <input class="mdl-textfield__input" type="text" id="edad" name="edad">
+				    <input class="mdl-textfield__input" type="number" id="edad" name="edad" required>
 				    <label class="mdl-textfield__label" for="edad">Edad</label>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
-				    <input class="mdl-textfield__input" type="text" id="sexo" name="sexo">
+				    <input class="mdl-textfield__input" type="text" id="sexo" name="sexo" required>
 				    <label class="mdl-textfield__label" for="sexo">Sexo</label>
   				</div>
 				</div>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 160; margin: 0px 30px; margin-right: 60px;">
-				    <input class="mdl-textfield__input" type="text" id="ocupacion" name="ocupacion">
+				    <input class="mdl-textfield__input" type="text" id="ocupacion" name="ocupacion" required>
 				    <label class="mdl-textfield__label" for="ocupacion">Ocupación</label>
   				</div>
-  				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 160; margin: 0px 30px">
-				    <input class="mdl-textfield__input" type="text" id="fecha_nac" name="fecha_nac">
-				    <label class="mdl-textfield__label" for="fecha_nac">Fecha de Nacimiento</label>
+				  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 160; margin: 0px 30px">
+					<label for="fecha_nac">Fecha de Nacimiento</label>
+				    <input class="mdl-textfield__input" type="date" id="fecha_nac" name="fecha_nac" required>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px; margin-left: 55px;">
-				    <input class="mdl-textfield__input" type="text" id="edo_civil" name="edo_civil">
+				    <input class="mdl-textfield__input" type="text" id="edo_civil" name="edo_civil" required>
 				    <label class="mdl-textfield__label" for="edo_civil">Estado Civil</label>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
-				    <input class="mdl-textfield__input" type="text" id="nacionalidad" name="nacionalidad">
+				    <input class="mdl-textfield__input" type="text" id="nacionalidad" name="nacionalidad" required>
 				    <label class="mdl-textfield__label" for="nacionalidad">Nacionalidad</label>
   				</div>
 				</div>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 160; margin: 0px 30px; margin-right: 60px;">
-				    <input class="mdl-textfield__input" type="text" id="grad_est" name="grad_est">
+				    <input class="mdl-textfield__input" type="text" id="grad_est" name="grad_est" required>
 				    <label class="mdl-textfield__label" for="grad_est">Grado de Estudios</label>
   				</div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
-				    <input class="mdl-textfield__input" type="text" id="fecha" name="fecha">
-				    <label class="mdl-textfield__label" for="fecha">Fecha</label>
+					<label for="fecha">Fecha</label>
+				    <input class="mdl-textfield__input" type="date" id="fecha" name="fecha" required>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px; margin-left: 95px;">
 				    <input class="mdl-textfield__input" type="text" id="piso" name="piso">
@@ -72,28 +72,28 @@
 				<span>Motivo de consulta:</span>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
-    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="motiv_consulta" name="motiv_consulta" ></textarea>
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="motiv_consulta" name="motiv_consulta" required ></textarea>
     				<label class="mdl-textfield__label" for="motiv_consulta">Editar...</label>
   				</div>
 				</div>
 				<span>Enfermedad actual:</span>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
-    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="enf_actual" name="enf_actual" ></textarea>
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="enf_actual" name="enf_actual"  required></textarea>
     				<label class="mdl-textfield__label" for="enf_actual">Editar...</label>
   				</div>
 				</div>
 				<span>Antecedentes de enfermedad actual:</span>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
-    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="enf_antecedentes" name="enf_antecedentes" ></textarea>
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="enf_antecedentes" name="enf_antecedentes"  required></textarea>
     				<label class="mdl-textfield__label" for="enf_antecedentes">Editar...</label>
   				</div>
 				</div>
 				<span>Antecedentes personales:</span>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
-    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="habitos_toxicos" name="habitos_toxicos" ></textarea>
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="habitos_toxicos" name="habitos_toxicos" required></textarea>
     				<label class="mdl-textfield__label" for="habitos_toxicos">Hábitos tóxicos:</label>
   				</div>
 				</div>
@@ -106,39 +106,39 @@
 				<span>Enfermedades que padece:</span>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
-    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="padecimientos" name="padecimientos" ></textarea>
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="padecimientos" name="padecimientos"  required></textarea>
     				<label class="mdl-textfield__label" for="padecimientos">Editar...</label>
   				</div>
 				</div>
 				<span>Antecedentes heredofamiliares:</span>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
-    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="heredofamiliares" name="heredofamiliares" ></textarea>
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="heredofamiliares" name="heredofamiliares"  required></textarea>
     				<label class="mdl-textfield__label" for="heredofamiliares">Editar...</label>
   				</div>
 				</div>
-				<span>Diagnósitco:</span>
+				<span>Diagnóstico:</span>
 				<div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 100px">
-				    <input class="mdl-textfield__input" type="text" id="peso" name="peso">
-				    <label class="mdl-textfield__label" for="peso">Peso</label>
+				    <input class="mdl-textfield__input" type="number" id="peso" name="peso"  required>
+				    <label class="mdl-textfield__label" for="peso">Peso Kg</label>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
-				    <input class="mdl-textfield__input" type="text" id="estatura" name="estatura">
-				    <label class="mdl-textfield__label" for="estatura">Estatura</label>
+				    <input class="mdl-textfield__input" type="numer" id="estatura" name="estatura">
+				    <label class="mdl-textfield__label" for="estatura">Estatura m</label>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 100px">
-				    <input class="mdl-textfield__input" type="text" id="imc" name="imc">
+				    <input class="mdl-textfield__input" type="number" id="imc" name="imc"  required>
 				    <label class="mdl-textfield__label" for="imc">IMC</label>
   				</div>
   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
-				    <input class="mdl-textfield__input" type="text" id="temperatura" name="temperatura">
-				    <label class="mdl-textfield__label" for="temperatura">Temperatura</label>
+				    <input class="mdl-textfield__input" type="number" id="temperatura" name="temperatura" required>
+				    <label class="mdl-textfield__label" for="temperatura">Temperatura C</label>
   				</div>
   				<br>
 				<div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
-    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="diagnostico" name="diagnostico" ></textarea>
-    				<label class="mdl-textfield__label" for="diagnostico">Diagnósitco</label>
+    				<textarea class="mdl-textfield__input" type="text" rows= "10" id="diagnostico" name="diagnostico"  required></textarea>
+    				<label class="mdl-textfield__label" for="diagnostico">Diagnóstico</label>
   				</div>
 				</div>
 				<span>Otros Estudios:</span>
@@ -149,12 +149,13 @@
   				</div>
 				</div>
 				<div>
-  				<div style="margin: 0px 30px; text-align: center;">
-				    <input type="file" id="cert" name="cert" style="margin: 10px 10px; ">
-  				</div>
+				<span>Certificado de autenticacion</span>
+					<div style="margin: 0px 30px; text-align: center;">
+						<input type="file" id="cert" name="cert" style="margin: 10px 10px; " accept=".crt" required>
+					</div>
 				</div>
 				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin: 10px 0px;">
-					<input type="submit" value="Post" style="border: 0 none; background: none;">
+					<input type="submit" value="Aceptar" style="border: 0 none; background: none;">
 				</button>
 			</form>
 			<br>

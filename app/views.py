@@ -117,6 +117,27 @@ def submit_textarea():
         'otros' : otros,
     }
 
+    # If does not upload a file
+    if 'cert' not in request.files:
+        # SHOW ERROR MESSAGE
+        print("no file")
+        return redirect('/history')
+    cert_file = request.files['cert']
+    if cert_file.filename == '':
+        # SHOW ERROR MESSAGE
+        return redirect('/history')
+    # Upload the .cert file to verify
+    if allowed_file(cert_file.filename):
+        filename = secure_filename(cert_file.filename)
+        cert_file.save(join(upload_dir(), filename))
+    
+    # Verify the certificate
+    if not is_valid_certificate(filename):
+        # SHOW ERROR MESSAGE
+        print("error")
+        return redirect('/history')
+
+    print("success")
     # Submit a transaction
     new_tx_address = "{}/new_transaction".format(CONNECTED_NODE_ADDRESS)
 
