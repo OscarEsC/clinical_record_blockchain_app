@@ -2,11 +2,22 @@
 {% extends "base.html" %}
 
 {% block content %}	
+  <style>
+    #caja{
+      float:left;
+      clear:both;
+      border:2px solid #e6e6e6;
+      margin-top:2px;
+      padding:5px;
+      overflow:auto;
+      text-align: center;
+    }
+  </style>
 
 	<div class="cont" style="margin-top: 150px">
 		<ul class="demo-list-two mdl-list" style="width: 50%; margin-left: auto; margin-right: auto;">
 			{% for post in posts %}
-  			<li class="mdl-list__item mdl-list__item--two-line">
+  			<li class="mdl-list__item mdl-list__item--two-line" style="height: 120px; width: 65%; margin-left: auto; margin-right: auto;">
     			<span class="mdl-list__item-primary-content">
       			<i class="material-icons mdl-list__item-avatar">person</i>
       			<span>{{post.apellidos}} {{post.nombres}}</span>
@@ -14,7 +25,169 @@
     			</span>
     			<span class="mdl-list__item-secondary-content">{{readable_time(post.timestamp)}}</span>
   			</li>
-  			{% endfor %}
+        <div id="caja">
+        <form action="/history" id="caja" enctype="multipart/form-data" method="POST">
+        <span>Datos personales:</span>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 100px">
+            <label for="num_hist" style="color: #C0C0C0">Num. Historia</label>
+              <a class="mdl-textfield__input" type="text" id="num_hist" name="num_hist" required>{{post.num_hist}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+              <label for="id_paciente" style="color: #C0C0C0">ID</label>
+              <a class="mdl-textfield__input" type="text" id="id_paciente" name="id_paciente">{{post.id_paciente}}</a>
+            </div>
+        </div>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 190; margin: 0px 30px">
+            <label for="apellidos" style="color: #C0C0C0">Apellidos</label>
+              <a class="mdl-textfield__input" type="text" id="apellidos" name="apellidos" required>{{post.apellidos}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 190; margin: 0px 30px">
+              <label for="nombres" style="color: #C0C0C0">Nombres</label>
+              <a class="mdl-textfield__input" type="text" id="nombres" name="nombres" required>{{post.nombres}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+              <label for="edad" style="color: #C0C0C0">Edad</label>
+              <a class="mdl-textfield__input" type="number" id="edad" name="edad" required>{{post.edad}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+              <label for="sexo" style="color: #C0C0C0">Sexo</label>
+              <a class="mdl-textfield__input" type="text" id="sexo" name="sexo" required>{{post.sexo}}</a>
+            </div>
+        </div>
+        {% if post.nacionalidad %}
+        <div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 160; margin: 0px 30px; margin-right: 60px;">
+              <label for="ocupacion" style="color: #C0C0C0">Ocupación</label>
+              <a class="mdl-textfield__input" type="text" id="ocupacion" name="ocupacion" required>{{post.ocupacion}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 160; margin: 0px 30px">
+            <label for="fecha_nac" style="color: #C0C0C0">Fecha de Nacimiento</label>
+              <a class="mdl-textfield__input" type="date" id="fecha_nac" name="fecha_nac" required>{{post.fecha_nac}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px; margin-left: 55px;">
+              <label for="edo_civil" style="color: #C0C0C0">Estado Civil</label>
+              <a class="mdl-textfield__input" type="text" id="edo_civil" name="edo_civil" required>{{post.edo_civil}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+              <label for="nacionalidad" style="color: #C0C0C0">Nacionalidad</label>
+              <a class="mdl-textfield__input" type="text" id="nacionalidad" name="nacionalidad" required>{{post.nacionalidad}}</a>
+            </div>
+        </div>
+        {% endif %}
+        {% if post.piso %}
+        <div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 160; margin: 0px 30px; margin-right: 60px;">
+              <label for="grad_est" style="color: #C0C0C0">Grado de Estudios</label>
+              <a class="mdl-textfield__input" type="text" id="grad_est" name="grad_est" required>{{post.grad_est}}</a>
+            </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+            <label for="fecha" style="color: #C0C0C0">Fecha</label>
+              <a class="mdl-textfield__input" type="date" id="fecha" name="fecha" required>{{post.fecha}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px; margin-left: 95px;">
+              <label for="piso" style="color: #C0C0C0">Piso</label>
+              <a class="mdl-textfield__input" type="text" id="piso" name="piso">{{post.piso}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+              <label for="cama" style="color: #C0C0C0">Cama</label>
+              <a class="mdl-textfield__input" type="text" id="cama" name="cama">{{post.cama}}</a>
+            </div>
+        </div>
+        {% else %}
+        <div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+            <label for="fecha" style="color: #C0C0C0">Fecha</label>
+              <a class="mdl-textfield__input" type="date" id="fecha" name="fecha" required>{{post.fecha}}</a>
+            </div>
+        </div>
+        {% endif %}
+
+        <span>Motivo de consulta:</span>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+              <a class="mdl-textfield__input" type="text" rows= "10" id="motiv_consulta" name="motiv_consulta" required >{{post.motiv_consulta}}</a>
+            </div>
+        </div>
+        <span>Enfermedad actual:</span>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+              <a class="mdl-textfield__input" type="text" rows= "10" id="enf_actual" name="enf_actual"  required>{{post.enf_actual}}</a>
+            </div>
+        </div>
+        {% if post.enf_antecedentes %}
+        <span>Antecedentes de enfermedad actual:</span>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+              <a class="mdl-textfield__input" type="text" rows= "10" id="enf_antecedentes" name="enf_antecedentes" required>{{post.enf_antecedentes}}</a>
+            </div>
+        </div>
+        <span>Antecedentes personales:</span>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+              <label for="habitos_toxicos" style="color: #C0C0C0">Hábitos tóxicos:</label>
+              <a class="mdl-textfield__input" type="text" rows= "10" id="habitos_toxicos" name="habitos_toxicos" required>{{post.habitos_toxicos}}</a>
+            </div>
+        </div>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+              <label for="habitos_fisiologicos" style="color: #C0C0C0">Hábitos fisiológicos</label>
+              <a class="mdl-textfield__input" type="text" rows= "10" id="habitos_fisiologicos" name="habitos_fisiologicos" >{{post.habitos_fisiologicos}}</a>
+            </div>
+        </div>
+        {% endif %}
+        {% if post.padecimientos %}
+        <span>Enfermedades que padece:</span>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+              <a class="mdl-textfield__input" type="text" rows= "10" id="padecimientos" name="padecimientos" required>{{post.padecimientos}}</a>
+            </div>
+        </div>
+        {% endif %}
+        {% if post.heredofamiliares %}
+        <span>Antecedentes heredofamiliares:</span>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+              <a class="mdl-textfield__input" type="text" rows= "10" id="heredofamiliares" name="heredofamiliares" required>{{post.heredofamiliares}}</a>
+            </div>
+        </div>
+        {% endif %}
+        <span>Diagnóstico:</span>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 100px">
+              <label for="peso" style="color: #C0C0C0">Peso Kg</label>
+              <a class="mdl-textfield__input" type="number" id="peso" name="peso"  required>{{post.peso}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+              <label for="estatura" style="color: #C0C0C0">Estatura m</label>
+              <a class="mdl-textfield__input" type="numer" id="estatura" name="estatura">{{post.estatura}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 100px">
+              <label for="imc" style="color: #C0C0C0">IMC</label>
+              <a class="mdl-textfield__input" type="number" id="imc" name="imc"  required>{{post.imc}}</a>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120; margin: 0px 30px">
+              <label for="temperatura" style="color: #C0C0C0">Temperatura C</label>
+              <a class="mdl-textfield__input" type="number" id="temperatura" name="temperatura" required>{{post.temperatura}}</a>
+          </div>
+            <br>
+          <div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+              <label for="diagnostico" style="color: #C0C0C0">Diagnóstico</label>
+              <a class="mdl-textfield__input" type="text" rows= "10" id="diagnostico" name="diagnostico"  required>{{post.diagnostico}}</a>
+            </div>
+        </div>
+        {% if post.otros %}
+        <span>Otros Estudios:</span>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield" style="width: 700px;">
+              <a class="mdl-textfield__input" type="text" rows= "10" id="otros" name="otros" >{{post.otros}}</a>
+            </div>
+        </div>
+        {% endif %}
+      </form>
+      </div>
+  		{% endfor %}
 		</ul>
 
 	</div>

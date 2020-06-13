@@ -9,7 +9,6 @@ from app.auxiliar.auxiliar import *
 from os.path import join
 from werkzeug.utils import secure_filename
 
-
 # The node with which our application interacts, there can be multiple
 # such nodes as well.
 CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
@@ -80,7 +79,7 @@ def medical():
 @app.route('/transactions')
 def transaction():
     fetch_posts()
-    return render_template('/transactions.html',
+    return render_template('transactions.html',
                            title='Transaction',
                            posts=posts,
                            node_address=CONNECTED_NODE_ADDRESS,
