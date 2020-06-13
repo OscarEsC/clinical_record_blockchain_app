@@ -12,3 +12,4 @@ mkdir newcerts
 mkdir keys
 mkdir csrs
 mkdir tmp
+mkdir ../certs_to_verify
